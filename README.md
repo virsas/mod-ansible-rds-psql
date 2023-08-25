@@ -72,7 +72,7 @@ host_key_checking=False
 ```yaml
 ---
 ---
-- hosts: db
+- hosts: rds_psql
   connection: local
   roles:
     - rds_psql
