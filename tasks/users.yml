@@ -1,0 +1,46 @@
+- name: "Set variables"
+  set_fact:
+    user: "{{ user_item.name }}"
+
+- name: "Create db user {{ user }}"
+  postgresql_user:
+    login_db: "{{ userdb }}"
+    login_host: "{{ DBHOST }}"
+    login_password: "{{ DBPASS }}"
+    login_user: "{{ DBUSER }}"
+    login_port: "{{ DBPORT }}"
+
+    name: "{{ user }}"
+    password: "{{ user_item.password | default(omit) }}"
+
+- name: "Add {{ user }} to groups"
+  include_tasks: groups.yml
+  vars:
+    role: "{{ user }}"
+    groupdb: "{{ userdb }}"
+  with_items:
+    - "{{ user_item.groups }}"
+  loop_control:
+    loop_var: group_item
+  when:
+    - user_item.groups is defined
+    - user_item.groups is not string
+    - user_item.groups is not mapping
+    - user_item.groups is iterable
+    - user_item.groups | length > 0
+
+- name: "Add privileges to {{ user }}"
+  include_tasks: privileges.yml
+  vars:
+    role: "{{ user }}"
+    privilegesdb: "{{ userdb }}"
+  with_items:
+    - "{{ user_item.privileges }}"
+  loop_control:
+    loop_var: privilege_item
+  when:
+    - user_item.privileges is defined
+    - user_item.privileges is not string
+    - user_item.privileges is not mapping
+    - user_item.privileges is iterable
+    - user_item.privileges | length > 0

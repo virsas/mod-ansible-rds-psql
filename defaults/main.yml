@@ -1,0 +1,7 @@
+---
+DBHOST: ""
+DBPASS: ""
+DBUSER: ""
+DBPORT: ""
+
+POSTGRES_CONFIGURATION: []

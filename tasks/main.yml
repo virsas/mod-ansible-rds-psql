@@ -1,0 +1,13 @@
+---
+- name: "Configure databases"
+  include_tasks: databases.yml
+  with_items:
+    - "{{ POSTGRES_CONFIGURATION }}"
+  loop_control:
+    loop_var: database_item
+  when:
+    - POSTGRES_CONFIGURATION is defined
+    - POSTGRES_CONFIGURATION is not string
+    - POSTGRES_CONFIGURATION is not mapping
+    - POSTGRES_CONFIGURATION is iterable
+    - POSTGRES_CONFIGURATION | length > 0

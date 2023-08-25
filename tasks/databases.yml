@@ -1,0 +1,28 @@
+- name: "Set variables"
+  set_fact:
+    database: "{{ database_item.db }}"
+
+- name: "Create db {{ database }}"
+  postgresql_db:
+    login_host: "{{ DBHOST }}"
+    login_password: "{{ DBPASS }}"
+    login_user: "{{ DBUSER }}"
+    login_port: "{{ DBPORT }}"
+
+    name: "{{ database }}"
+    encoding: "{{ database_item.encoding | default(omit) }}"
+
+- name: "Configure users"
+  include_tasks: users.yml
+  vars:
+    userdb: "{{ database }}"
+  with_items:
+    - "{{ database_item.users }}"
+  loop_control:
+    loop_var: user_item
+  when:
+    - database_item.users is defined
+    - database_item.users is not string
+    - database_item.users is not mapping
+    - database_item.users is iterable
+    - database_item.users | length > 0

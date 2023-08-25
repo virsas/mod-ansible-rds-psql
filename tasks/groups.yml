@@ -1,0 +1,13 @@
+- name: "Add user {{ role }} to group {{ group_item.name }}"
+  postgresql_privs:
+    login_db: "{{ groupdb }}"
+    login_host: "{{ DBHOST }}"
+    login_password: "{{ DBPASS }}"
+    login_user: "{{ DBUSER }}"
+    login_port: "{{ DBPORT }}"
+
+    roles: "{{ role }}"
+
+    type: group
+    objs: "{{ group_item.name}}"
+    admin_option: "{{ group_item.admin_option }}"
