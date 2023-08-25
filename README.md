@@ -18,7 +18,7 @@ touch requirements/rds_psql.yml
 - src: "https://github.com/virsas/mod-ansible-rds-psql"
   scm: git
   version: v1.0.0
-  name: rds-psql
+  name: rds_psql
   path: vss_galaxy_roles
 ```
 
@@ -41,8 +41,8 @@ If you are using git for your playbooks and sites configuration, add vss_galaxy_
 ```bash
 $ cd vss_galaxy_roles
 $ ls
-rds-psql
-$ cd rds-psql
+rds_psql
+$ cd rds_psql
 $ ls -1
 defaults
 LICENSE
@@ -67,7 +67,7 @@ host_key_checking=False
 
 ## Files
 
-### Playbook (./playbooks/rds-psql.yml)
+### Playbook (./playbooks/rds_psql.yml)
 
 ```yaml
 ---
@@ -75,17 +75,17 @@ host_key_checking=False
 - hosts: db
   connection: local
   roles:
-    - rds-psql
+    - rds_psql
 ```
 
 ### Inventory (./sites/NAME/inventory)
 
 ```txt
-[rds-psql]
-rds-psql_01
+[rds_psql]
+rds_psql_01
 ```
 
-### Host vars (./sites/NAME/host_vars/rds-psql_01.yml)
+### Host vars (./sites/NAME/host_vars/rds_psql_01.yml)
 
 ```yaml
 ---
@@ -124,7 +124,7 @@ POSTGRES_CONFIGURATION:
   ]
 ```
 
-### Group vars (./sites/NAME/group_vars/rds-psql.yml)
+### Group vars (./sites/NAME/group_vars/rds_psql.yml)
 
 Please see the variables below to get the complete list of possible modifications. The YAML file below is just a basic example of a minimal configuration.
 
@@ -136,7 +136,7 @@ DBPORT: 5432
 ## Usage
 
 ```bash
-ansible-playbook -i sites/NAME/inventory playbooks/rds-psql.yml --check --diff
+ansible-playbook -i sites/NAME/inventory playbooks/rds_psql.yml --check --diff
 ```
 
 ## Variables
