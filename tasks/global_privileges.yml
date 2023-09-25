@@ -1,0 +1,13 @@
+- name: "Add privileges {{ global_privilege_item }} to user {{ role }}"
+  postgresql_privs:
+    login_db: "{{ privilegesdb }}"
+    login_host: "{{ DBHOST }}"
+    login_password: "{{ DBPASS }}"
+    login_user: "{{ DBUSER }}"
+    login_port: "{{ DBPORT }}"
+
+    roles: "{{ role }}"
+
+    type: "{{ global_privilege_item.type }}"
+    privs: "{{ global_privilege_item.privileges }}"
+    grant_option: "{{ global_privilege_item.grant_option }}"

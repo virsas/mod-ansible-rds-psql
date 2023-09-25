@@ -166,7 +166,10 @@ POSTGRES_CONFIGURATION: [
             password: password,
             # group the user is attached to. In case of IAM authentication, this is how you would configure it.
             groups: [{ name: rds_iam, admin_option: False }],
-            # individual privileges
+            # individual database level privileges.
+            global_privileges:
+              [{ type: database, privileges: "CREATE", grant_option: False }],
+            # individual schema level privileges.
             privileges: [
                 {
                   # supported types table, partition table, sequence, function or procedure

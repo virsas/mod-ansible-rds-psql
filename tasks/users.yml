@@ -44,3 +44,19 @@
     - user_item.privileges is not mapping
     - user_item.privileges is iterable
     - user_item.privileges | length > 0
+
+- name: "Add global privileges to {{ user }}"
+  include_tasks: global_privileges.yml
+  vars:
+    role: "{{ user }}"
+    privilegesdb: "{{ userdb }}"
+  with_items:
+    - "{{ user_item.global_privileges }}"
+  loop_control:
+    loop_var: global_privilege_item
+  when:
+    - user_item.global_privileges is defined
+    - user_item.global_privileges is not string
+    - user_item.global_privileges is not mapping
+    - user_item.global_privileges is iterable
+    - user_item.global_privileges | length > 0
