@@ -9,5 +9,6 @@
     roles: "{{ role }}"
 
     type: "{{ global_privilege_item.type }}"
+    objs: "{{ privilege_item.objects}}"
     privs: "{{ global_privilege_item.privileges }}"
     grant_option: "{{ global_privilege_item.grant_option }}"
