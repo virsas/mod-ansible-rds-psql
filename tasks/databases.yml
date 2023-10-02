@@ -26,3 +26,4 @@
     - database_item.users is not mapping
     - database_item.users is iterable
     - database_item.users | length > 0
+  no_log: True

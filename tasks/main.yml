@@ -11,3 +11,4 @@
     - POSTGRES_CONFIGURATION is not mapping
     - POSTGRES_CONFIGURATION is iterable
     - POSTGRES_CONFIGURATION | length > 0
+  no_log: True
